@@ -1,10 +1,11 @@
 SELECT
 
 1. SELECT * FROM `students` WHERE YEAR (`date_of_birth`)= 1990;
-2. SELECT * FROM `courses` WHERE `cfu`> 10 SELECT * FROM `courses` WHERE `cfu`> 10;
+2. SELECT * FROM `courses` WHERE `cfu`> 10;
 3. SELECT * FROM `students` WHERE YEAR (`date_of_birth`) < 1992;
 4. SELECT * FROM `courses` WHERE `year`= 1 AND `period`= "I semestre" ;
 5. SELECT * FROM `exams` WHERE `date`= "2020-06-20" AND `hour` BETWEEN "14:00:00" AND "23:59:59";
+5b. SELECT * FROM exams WHERE DATE = "2020-06-20 AND" HOUR(hour > 14);
 6. SELECT * FROM `degrees` WHERE `level`= "magistrale" ;
 7. SELECT COUNT(id) FROM `departments`;
 8. SELECT COUNT(`id`) FROM `teachers` WHERE `phone`IS NULL;
@@ -12,6 +13,10 @@ SELECT
 GROUP BY
 
 1. SELECT COUNT(*) FROM `students` GROUP BY`enrolment_date;
+1b. 1. SELECT COUNT(*) FROM `students` GROUP BY`enrolment_date;
 2. SELECT COUNT(`id`) FROM `teachers` GROUP BY `office_address`;
+2b. SELECT COUNT(`id`) AS teachers, office address FROM `teachers` GROUP BY `office_address`;
 3. SELECT AVG(`vote`) FROM `exam_student` GROUP BY `exam_id` ;
+3b. SELECT AVG(`vote`), exam_id FROM `exam_student` GROUP BY `exam_id` 
 4. SELECT COUNT(`id`) FROM `degrees` GROUP BY `department_id` ;
+4b. SELECT COUNT(`id`), AS degrees_no department_id FROM `degrees` GROUP BY `department_id` ;
