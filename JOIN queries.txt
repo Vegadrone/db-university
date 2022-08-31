@@ -13,8 +13,14 @@
     FROM `courses` INNER JOIN `course_teacher` ON `course_teacher`.`course_id` = `courses`.`id` 
     INNER JOIN `teachers` 
     ON `course_teacher`.`teacher_id` = `teachers`.`id` 
-    WHERE `teachers`.`id`= 44
-4.
+    WHERE `teachers`.`id`= 44;
+
+4.  SELECT `students`.`surname`,`students`.`name`, `degrees`.`name` AS `degree_name`, `departments`.`name` AS `department_name` 
+    FROM `students` 
+    INNER JOIN `degrees` 
+    ON `degrees`.`id` = `students`.`degree_id` 
+    INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id` 
+    ORDER BY `students`.`surname`ASC, `students`.`name` ASC;
 5.
 6.
 7.
