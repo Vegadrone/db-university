@@ -1,7 +1,8 @@
 1.  SELECT `students`.`name`, `students`.`surname`, `degrees`.name, `students`.`enrolment_date` 
     FROM `students` 
     INNER JOIN `degrees` 
-    ON `degrees`.`id`= `students`.`degree_id` WHERE `degrees`.`name`= "Corso di Laurea in Economia" 
+    ON `degrees`.`id`= `students`.`degree_id` 
+    WHERE `degrees`.`name`= "Corso di Laurea in Economia" 
 
 2.  SELECT `departments`.`name` AS `department_name`, `degrees`.`name` AS `degree_name`, `degrees`.`level` 
     FROM `degrees` 
@@ -10,7 +11,9 @@
     WHERE `departments`.`name` = "Dipartimento di Neuroscienze" AND `degrees`.`level` = "magistrale" 
 
 3.  SELECT `courses`.`name` AS `course_name`, `teachers`.`name`, `teachers`.`surname` 
-    FROM `courses` INNER JOIN `course_teacher` ON `course_teacher`.`course_id` = `courses`.`id` 
+    FROM `courses` 
+    INNER JOIN `course_teacher` 
+    ON `course_teacher`.`course_id` = `courses`.`id` 
     INNER JOIN `teachers` 
     ON `course_teacher`.`teacher_id` = `teachers`.`id` 
     WHERE `teachers`.`id`= 44;
@@ -19,7 +22,8 @@
     FROM `students` 
     INNER JOIN `degrees` 
     ON `degrees`.`id` = `students`.`degree_id` 
-    INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id` 
+    INNER JOIN `departments` 
+    .ON `departments`.`id` = `degrees`.`department_id` 
     ORDER BY `students`.`surname`ASC, `students`.`name` ASC;
 
 5.  SELECT `degrees`.`name` AS `degree_name`, `courses`.`name` AS `course_name`, `teachers`.`surname`, `teachers`.`name` 
@@ -31,9 +35,31 @@
     INNER JOIN `teachers` 
     ON `course_teacher`.`course_id` = `teachers`.`id`
 
-6.
+6.  SELECT DISTINCT `teachers`.`id`, `teachers`.`surname` AS `teacher_surname`, `teachers`.`name` AS `teacher_name`, `departments`.`name` AS `department_name`
+    FROM `teachers`
+    JOIN `course_teacher`
+    ON `teachers`.`id` = `course_teacher`.`teacher_id`
+    JOIN `courses`
+    ON `courses`.`id` = `course_teacher`.`course_id`
+    JOIN `degrees`
+    ON `degrees`.`id` = `courses`.`degree_id`
+    JOIN `departments`
+    ON `departments`.`id` = `degrees`.`department_id`
+    WHERE `departments`.`id` = 5;
 
-7.
+
+7. SELECT `students`.`id` , `students`.`surname` AS `student_surname`, `students`.`name` AS `student_name`, `courses`.`name` AS `course`, COUNT(`exams`.`id`) AS `exam_attempts`, MAX(`exam_student`.`vote`) AS `highest_vote`
+    FROM `students`
+    JOIN `exam_student`
+    ON `students`.`id` = `exam_student`.`student_id`
+    JOIN `exams`
+    ON `exams`.`id` = `exam_student`.`exam_id`
+    JOIN `courses`
+    ON `courses`.`id` = `exams`.`course_id`
+    GROUP BY  `students`.`id`, `students`.`surname`, `students`.`name`,  `courses`.`name`
+    HAVING `highest_vote` >= 18;
+
+
 
 1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
